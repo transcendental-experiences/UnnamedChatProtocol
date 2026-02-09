@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ucp.Database;
+using Ucp.Server.Gateway;
 using Ucp.Server.Testing;
 
 namespace Ucp.Server;
@@ -25,11 +26,15 @@ public partial class Program
             app.MapOpenApi();
         }
 
+        app.UseWebSockets();
+
         app.UseHttpsRedirection();
 
         // Loadbearing weather forecast, see WeatherTest.
         // Remove when we have some properly tested endpoints.
         WeatherApi.Map(app);
+
+        GatewayApi.Map(app);
         
         app.Run();
     }
