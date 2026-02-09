@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Ucp.Database;
 using Ucp.Server.Testing;
 
 namespace Ucp.Server;
@@ -11,6 +13,9 @@ public partial class Program
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+        
+        builder.Services.AddDbContextPool<UpcDbContext>(opt => 
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("UpcDbContext")));
 
         var app = builder.Build();
 

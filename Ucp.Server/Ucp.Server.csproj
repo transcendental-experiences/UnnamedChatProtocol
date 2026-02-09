@@ -9,10 +9,16 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Testing\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ucp.Database\Ucp.Database.csproj" />
     </ItemGroup>
 </Project>
