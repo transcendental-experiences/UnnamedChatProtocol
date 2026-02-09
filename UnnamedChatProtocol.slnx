@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="Ucp.Database/Ucp.Database.csproj" />
   <Project Path="Ucp.Server/Ucp.Server.csproj" />
   <Project Path="Ucp.Testing/Ucp.Testing.csproj" />
 </Solution>
