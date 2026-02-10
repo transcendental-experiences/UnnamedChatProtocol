@@ -8,4 +8,11 @@ public sealed partial class UpcDbContext(DbContextOptions<UpcDbContext> options)
     {
          // ...
     }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder
+            .Properties<Snowflake>()
+            .HaveConversion<SnowflakeConverter>();
+    }
 }
