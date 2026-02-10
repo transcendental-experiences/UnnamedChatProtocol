@@ -1,4 +1,6 @@
-﻿namespace Ucp.Server.Gateway;
+﻿using System.Net;
+
+namespace Ucp.Server.Gateway;
 
 public static class GatewayApi
 {
@@ -17,10 +19,10 @@ public static class GatewayApi
                 uri = "wss://" + uri["https://".Length..];
 
             await context.Response.WriteAsJsonAsync(
-                new { Url = uri });
+                new GetGatewayResponse(uri));
         }).WithName("GetGateway");
 
-        app.MapGet("/_gateway_connect", async (HttpContext context) =>
+        app.MapGet($"/__gateway_connect_{Random.Shared.Next(0, 99999)}", async (HttpContext context) =>
         {
             if (context.WebSockets.IsWebSocketRequest)
             {
@@ -28,7 +30,9 @@ public static class GatewayApi
                 return;
             }
 
-            context.Response.StatusCode = 400;
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
         }).WithName("GatewayConnect");
     }
+
+    public sealed record GetGatewayResponse(string Url);
 }
